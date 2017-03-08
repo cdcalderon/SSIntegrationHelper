@@ -16,7 +16,6 @@ app.post('/sfshook', (req, res) => {
         res.header('smartsheet-hook-response', req.headers["smartsheet-hook-challenge"]);
         res.status(200).send(req.body);
     } else {
-        // do something with event information
         console.log("sending cell update")
         const cellUpdateUrlBase = 'http://localhost:58037/api/cellchange/';
         const earningUrl = `${cellUpdateUrlBase + req.body.webhookId}`;
@@ -33,7 +32,6 @@ app.post('/sfshook', (req, res) => {
 
         console.log(req.body);
     }
-    //res.status(200).send(req.body);
 
 });
 
