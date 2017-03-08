@@ -11,13 +11,15 @@ app.use(bodyParser.json());
 app.post('/sfshook', (req, res) => {
 
     if (req.headers["smartsheet-hook-challenge"]) {
+        console.log("Webhook Enabled");
         console.log(req.body);
         res.header('smartsheet-hook-response', req.headers["smartsheet-hook-challenge"]);
         res.status(200).send(req.body);
     } else {
         // do something with event information
         console.log("sending cell update")
-        const earningUrl = 'http://localhost:58037/api/cellchange/12';
+        const cellUpdateUrlBase = 'http://localhost:58037/api/cellchange/';
+        const earningUrl = `${cellUpdateUrlBase + req.body.webhookId}`;
         var sheetId = req.body.events[0].id;
         var rowId = req.body.events[1].id;
         var columnId = req.body.events[2].columnId;
