@@ -8,6 +8,10 @@ const port = process.env.PORT || 3000; // process.env.PORT - used by heroku
 
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+    res.send("Success");
+});
+
 app.post('/sfshook', (req, res) => {
 
     if (req.headers["smartsheet-hook-challenge"]) {
@@ -16,10 +20,11 @@ app.post('/sfshook', (req, res) => {
         res.header('smartsheet-hook-response', req.headers["smartsheet-hook-challenge"]);
         res.status(200).send(req.body);
     } else {
-        console.log("sending cell update")
+        console.log("sending cell update");
+        console.log(req.headers);
         const cellUpdateUrlBase = 'http://localhost:58037/api/cellchange/';
         const earningUrl = `${cellUpdateUrlBase + req.body.webhookId}`;
-        var sheetId = req.body.events[0].id;
+        var sheetId = req.body.scopeObjectId;
         var rowId = req.body.events[1].id;
         var columnId = req.body.events[2].columnId;
         axios.post(`${earningUrl}`, {
