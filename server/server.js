@@ -22,7 +22,9 @@ app.post('/sfshook', (req, res) => {
     } else {
         console.log("sending cell update");
         console.log(req.headers);
-        const cellUpdateUrlBase = 'http://localhost:58037/api/cellchange/';
+        //const cellUpdateUrlBase = 'http://localhost:58037/api/cellchange/';
+        const cellUpdateUrlBase = 'http://dcrm-app-001-d/sfsrestestore/api/cellchange/';
+
         const earningUrl = `${cellUpdateUrlBase + req.body.webhookId}`;
         var sheetId = req.body.scopeObjectId;
         var rowId = req.body.events[1].id;
