@@ -16,12 +16,24 @@ app.post('/sfshook', (req, res) => {
 
     if (req.headers["smartsheet-hook-challenge"]) {
         console.log("Webhook Enabled");
+        console.log("Request:");
+        console.log(req);
+        console.log("Body:");
         console.log(req.body);
         res.header('smartsheet-hook-response', req.headers["smartsheet-hook-challenge"]);
         res.status(200).send(req.body);
     } else {
         console.log("sending cell update");
+        console.log("Request:----------------------------------------------------------------");
+        console.log(req);
+        console.log("END Request:----------------------------------------------------------------");
+        console.log("Body:-----------------------------------------------------------------");
+        console.log(req.body);
+        console.log("End Body:-----------------------------------------------------------------");
+        console.log("Headers:--------------------------------------------------------------");
         console.log(req.headers);
+        console.log("End Headers----------------------------------------------------------:");
+
         //const cellUpdateUrlBase = 'http://localhost:58037/api/cellchange/';
         const cellUpdateUrlBase = 'http://dcrm-app-001-d/sfsrestestore/api/cellchange/';
 
