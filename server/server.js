@@ -52,7 +52,7 @@ app.post('/sfshook', (req, res) => {
             "columnId": columnId,
             "rowId": rowId,
             "sheetId": sheetId
-        }).then(() => {
+        }, config).then(() => {
             res.status(200).send(req.body);
         });
 
