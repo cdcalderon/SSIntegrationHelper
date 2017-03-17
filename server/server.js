@@ -42,19 +42,22 @@ app.post('/sfshook', (req, res) => {
 
         // res.header('Authorization', 'Basic ' + 'ZGV2XGNhY2FsZGVyOkxvcmUyMTIxIQ==');
         var config = {
-            headers: { 'Authorization': 'Basic ' + 'ZGV2XGNhY2FsZGVyOkxvcmUyMTIxIQ==' }
+            headers: { 'Authorization': 'Basic ZGV2XGNhY2FsZGVyOkxvcmUyMTIxIQ==' }
         };
         const earningUrl = `${cellUpdateUrlBase + req.body.webhookId}`;
         var sheetId = req.body.scopeObjectId;
         var rowId = req.body.events[1].id;
         var columnId = req.body.events[2].columnId;
         axios.post(`${earningUrl}`, {
-            "columnId": columnId,
-            "rowId": rowId,
-            "sheetId": sheetId
-        }, config).then(() => {
-            res.status(200).send(req.body);
-        });
+                "columnId": columnId,
+                "rowId": rowId,
+                "sheetId": sheetId
+            }, config).then(() => {
+                res.status(200).send(req.body);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
         console.log(req.body);
     }
