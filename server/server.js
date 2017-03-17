@@ -56,6 +56,7 @@ app.post('/sfshook', (req, res) => {
                 res.status(200).send(req.body);
             })
             .catch((error) => {
+                console.log('--------------------------------------------CELL CHANGE ------ERROR-----------------------------------------');
                 console.log(error);
             });
 
