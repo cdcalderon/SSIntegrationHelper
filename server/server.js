@@ -16,10 +16,13 @@ app.post('/sfshook', (req, res) => {
 
     if (req.headers["smartsheet-hook-challenge"]) {
         console.log("----------------------------Webhook Enabled--------------------------------------------");
-        console.log("--------------------------------Request Webhook enable request:-----------------------------------------------");
-        console.log(req);
+        console.log("--------------------------------Request Header Webhook enable request:-----------------------------------------------");
+        console.log(req.headers);
+        console.log("--------------------------------*****End Request Header Webhook enable request:-----------------------------------------------");
+
         console.log("----------------------------------Body Webhook enable request:-------------------------------------------------");
         console.log(req.body);
+        console.log("----------------------------------*****END Body Webhook enable request:-------------------------------------------------");
         res.header('smartsheet-hook-response', req.headers["smartsheet-hook-challenge"]);
         res.status(200).send(req.body);
     } else {
